@@ -26,6 +26,8 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
-    "no-trailing-spaces": ["error"]
+    "no-trailing-spaces": ["error"],
+    "space-in-parens": ["error", "never"],
+    "object-curly-spacing": ["error", "always"]
   }
 }
