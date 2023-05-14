@@ -11,3 +11,8 @@ type AuthContextType = {
   getRole: (accessToken: string) => void;
   role: string;
 }
+
+type LoginBodyType = {
+  email: string;
+  password: string;
+}

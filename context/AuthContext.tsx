@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SplashScreen from 'expo-splash-screen';
 import { createContext, useState } from 'react';
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -10,6 +11,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     const accessToken = await getToken();
     console.log(accessToken);
     setIsLoggedIn(Boolean(accessToken));
+    setRole('user');
     return Boolean(accessToken);
   };
 
@@ -36,10 +38,9 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     return accessToken;
   };
 
-  const [role, setRole] = useState('user');
+  const [role, setRole] = useState('');
 
   const getRole = (accessToken: string): string => {
-    setRole(accessToken);
     return 'user';
   };
 
