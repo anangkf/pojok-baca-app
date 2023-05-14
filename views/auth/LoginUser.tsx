@@ -6,6 +6,7 @@ import Container from '../../components/common/Container';
 import { Link } from '@react-navigation/native';
 import FlexWrapper from '../../components/common/FlexWrapper';
 import { Formik } from 'formik';
+import Toast from 'react-native-toast-message';
 import { LoginUserValidationSchema } from '../../validation/auth.schema';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import theme from '../../styles/theme';
@@ -39,16 +40,21 @@ function LoginUser({ navigation }: LoginUserScreenProps) {
 
       <Formik
         initialValues={CONST.INIT_LOGIN_FORM}
-        onSubmit={async (values, { setErrors }) => {
+        onSubmit={async (values) => {
           try {
-            const res = await APIAuth.login(values);
+            const res = await APIAuth.loginUser(values);
             login(res.accessToken);
+            Toast.show({
+              text1: CONST.TOAST_SUCCESS_TITLE,
+              text2: 'Berhasil masuk'
+            });
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } catch (error: any) {
             const errMsg = error.response.data.message;
-            setErrors({
-              email: errMsg,
-              password: errMsg
+            Toast.show({
+              type: 'error',
+              text1: CONST.TOAST_ERROR_TITLE,
+              text2: errMsg
             });
           }
         }}

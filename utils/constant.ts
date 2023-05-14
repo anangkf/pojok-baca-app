@@ -6,7 +6,16 @@ const CONST = {
     email: '',
     password: ''
   },
-  EMAIL_REGEX: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
+  INIT_USER_REGISTER_FORM: {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    gender: ''
+  },
+  EMAIL_REGEX: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+  TOAST_ERROR_TITLE: 'Uppsss...',
+  TOAST_SUCCESS_TITLE: 'Yaay!'
 };
 
 export default CONST;

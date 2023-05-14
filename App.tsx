@@ -7,6 +7,7 @@ import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AppRouter from './routes';
 import AuthProvider from './context/AuthContext';
 import theme from './styles/theme';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,6 +41,7 @@ export default function App() {
         >
           <StatusBar style="auto" />
           <AppRouter />
+          <Toast />
         </PaperProvider>
       </SafeAreaProvider>
     </AuthProvider>

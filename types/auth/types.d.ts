@@ -16,3 +16,10 @@ type LoginBodyType = {
   email: string;
   password: string;
 }
+
+type RegisterUserBodyType = {
+  name: string;
+  email: string;
+  password: string;
+  gender: string;
+}

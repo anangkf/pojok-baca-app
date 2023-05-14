@@ -1,10 +1,18 @@
+/* eslint-disable no-useless-catch */
 import axiosInstance from '../utils/axiosInstance';
 
 const APIAuth = {
-  login: async (credential: LoginBodyType) => {
-    // eslint-disable-next-line no-useless-catch
+  loginUser: async (credential: LoginBodyType) => {
     try {
       const res = await axiosInstance.post('/auth/user/login', credential);
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  registerUser: async (body: RegisterUserBodyType) => {
+    try {
+      const res = await axiosInstance.post('/auth/user/register', body);
       return res.data;
     } catch (error) {
       throw error;
