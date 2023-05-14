@@ -7,6 +7,7 @@ type AuthContextType = {
   determineAuthStatus: () => void;
   login: (accessToken: string) => void;
   logout: () => void;
+  loginAdmin: (accessToken: string) => void;
   getToken: () => void;
   getRole: (accessToken: string) => void;
   role: string;

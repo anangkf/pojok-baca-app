@@ -28,3 +28,12 @@ export const RegisterUserValidationSchema = Yup.object().shape({
   gender: Yup.string()
     .required('Pilih salah satu Gender'),
 });
+
+export const LoginAdminValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .matches(CONST.EMAIL_REGEX, 'Email tidak valid')
+    .required('Email tidak boleh kosong'),
+  password: Yup.string()
+    .min(8, 'Password minimal 8 karakter')
+    .required('Password tidak boleh kosong'),
+});

@@ -17,7 +17,15 @@ const APIAuth = {
     } catch (error) {
       throw error;
     }
-  }
+  },
+  loginAdmin: async (credential: LoginBodyType) => {
+    try {
+      const res = await axiosInstance.post('/auth/admin/login', credential);
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default APIAuth;

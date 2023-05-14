@@ -1,4 +1,4 @@
-import { BASE_URL_API } from '@env';
+import { BASE_URL_API, JWT_SECRET } from '@env';
 
 const CONST = {
   BASE_URL_API: `${BASE_URL_API}/v1`,
@@ -15,7 +15,8 @@ const CONST = {
   },
   EMAIL_REGEX: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
   TOAST_ERROR_TITLE: 'Uppsss...',
-  TOAST_SUCCESS_TITLE: 'Yaay!'
+  TOAST_SUCCESS_TITLE: 'Yaay!',
+  JWT_SECRET
 };
 
 export default CONST;

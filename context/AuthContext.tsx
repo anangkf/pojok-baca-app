@@ -1,6 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as SplashScreen from 'expo-splash-screen';
 import { createContext, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// import JWT from 'expo-jwt';
+// import CONST from '../utils/constant';
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -9,9 +10,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
 
   const determineAuthStatus = async (): Promise<boolean> => {
     const accessToken = await getToken();
-    console.log(accessToken);
     setIsLoggedIn(Boolean(accessToken));
-    setRole('user');
     return Boolean(accessToken);
   };
 
@@ -19,6 +18,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     try {
       await AsyncStorage.setItem('accessToken', accessToken);
       setIsLoggedIn(true);
+      setRole('user');
     } catch (error) {
       console.log(error);
     }
@@ -28,6 +28,17 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     try {
       await AsyncStorage.removeItem('accessToken');
       setIsLoggedIn(false);
+      setRole('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loginAdmin = async (accessToken: string) => {
+    try {
+      await AsyncStorage.setItem('accessToken', accessToken);
+      setIsLoggedIn(true);
+      setRole('admin');
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +52,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [role, setRole] = useState('');
 
   const getRole = (accessToken: string): string => {
+    // const decoded = JWT.decode(accessToken, CONST.JWT_SECRET);
     return 'user';
   };
 
@@ -49,6 +61,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       value={{
         isLoggedIn, determineAuthStatus,
         login, logout, getToken,
+        loginAdmin,
         getRole, role
       }}
     >

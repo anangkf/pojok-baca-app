@@ -66,7 +66,8 @@ function LoginUser({ navigation }: LoginUserScreenProps) {
           handleSubmit,
           values,
           errors,
-          isSubmitting
+          isSubmitting,
+          isValid
         }) => (
           <View
             style={{
@@ -116,7 +117,7 @@ function LoginUser({ navigation }: LoginUserScreenProps) {
                 mode='contained'
                 onPress={() => handleSubmit()}
                 loading={isSubmitting}
-                disabled={Boolean(errors.email || errors.password)}
+                disabled={!isValid}
               >
               Masuk
               </Button>
