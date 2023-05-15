@@ -9,6 +9,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import HomeUser from '../views/user/HomeUser';
 import HomeAdmin from '../views/admin/HomeAdmin';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { IconButton } from 'react-native-paper';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,6 +29,7 @@ export default function AppRouter() {
 
   const Stack = createNativeStackNavigator<StackParamsList>();
   const Drawer = createDrawerNavigator();
+  const Tab = createBottomTabNavigator();
 
   if(isLoggedIn === null) return null;
 
@@ -40,25 +43,47 @@ export default function AppRouter() {
             options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
           />
         </Drawer.Navigator>
-        : <Stack.Navigator>
-          {isLoggedIn === false
-            ? <Stack.Group screenOptions={{ headerShown: false }} >
-              <Stack.Screen name='LoginUser' component={LoginUser} />
-              <Stack.Screen name='LoginAdmin' component={LoginAdmin} />
-              <Stack.Screen name='RegisterUser' component={RegisterUser} />
-            </Stack.Group>
-          // : role === 'admin'
-          //   ? <Drawer.Navigator screenOptions={{ drawerPosition: 'right' }} >
-          //     <Drawer.Screen name='HomeAdmin' component={HomeAdmin} options={{ drawerLabel: 'Home' }} />
-          //   </Drawer.Navigator>
-            // ? <Stack.Group>
-            //   <Stack.Screen name='HomeAdmin' component={HomeAdmin} />
-            // </Stack.Group>
-            : <Stack.Group>
-              <Stack.Screen name='HomeUser' component={HomeUser} />
-            </Stack.Group>
-          }
-        </Stack.Navigator>
+        : isLoggedIn === false
+          ? <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='LoginUser' component={LoginUser} />
+            <Stack.Screen name='LoginAdmin' component={LoginAdmin} />
+            <Stack.Screen name='RegisterUser' component={RegisterUser} />
+          </Stack.Navigator>
+          : <Tab.Navigator screenOptions={{ headerShown: false }} >
+            <Tab.Screen
+              name='HomeUser'
+              component={HomeUser}
+              options={{
+                tabBarLabel: 'Beranda',
+                tabBarIcon: ({ color, size }) => (
+                  <IconButton icon='home' iconColor={color} size={size} />
+                )
+              }}
+            />
+            <Tab.Screen
+              name='Buku'
+              component={HomeUser}
+              options={{
+                tabBarLabel: 'Buku',
+                tabBarIcon: ({ color, size }) => (
+                  <IconButton icon='leanpub' iconColor={color} size={size} />
+                )
+              }}
+            />
+            <Tab.Screen
+              name='UserAkun'
+              component={HomeUser}
+              options={{
+                tabBarLabel: 'Akun',
+                tabBarIcon: ({ color, size }) => (
+                  <IconButton icon='user' iconColor={color} size={size} />
+                )
+              }}
+            />
+          </Tab.Navigator>
+          // <Stack.Group>
+          //   <Stack.Screen name='HomeUser' component={HomeUser} />
+          // </Stack.Group>
       }
     </NavigationContainer>
   );

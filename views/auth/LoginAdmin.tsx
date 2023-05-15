@@ -123,7 +123,7 @@ function LoginAdmin({ navigation }: LoginAdminScreenProps) {
               >
               Masuk
               </Button>
-              <Button mode='text' onPress={() => navigation.navigate('LoginAdmin')} >Masuk sebagai User</Button>
+              <Button mode='text' onPress={() => navigation.navigate('LoginUser')} >Masuk sebagai User</Button>
             </View>
           </View>
         )}
