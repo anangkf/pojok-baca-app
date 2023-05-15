@@ -10,6 +10,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
 
   const determineAuthStatus = async (): Promise<boolean> => {
     const accessToken = await getToken();
+    const role = await getRole();
+    setRole(role);
     setIsLoggedIn(Boolean(accessToken));
     return Boolean(accessToken);
   };
@@ -17,8 +19,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const login = async (accessToken: string) => {
     try {
       await AsyncStorage.setItem('accessToken', accessToken);
+      await AsyncStorage.setItem('role', 'user');
       setIsLoggedIn(true);
-      setRole('user');
     } catch (error) {
       console.log(error);
     }
@@ -27,6 +29,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const logout = async () => {
     try {
       await AsyncStorage.removeItem('accessToken');
+      await AsyncStorage.removeItem('role');
       setIsLoggedIn(false);
       setRole('');
     } catch (error) {
@@ -37,7 +40,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const loginAdmin = async (accessToken: string) => {
     try {
       await AsyncStorage.setItem('accessToken', accessToken);
-      setIsLoggedIn(true);
+      await AsyncStorage.setItem('role', 'admin');
       setRole('admin');
     } catch (error) {
       console.log(error);
@@ -49,11 +52,11 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     return accessToken;
   };
 
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState<string | null>('');
 
-  const getRole = (accessToken: string): string => {
-    // const decoded = JWT.decode(accessToken, CONST.JWT_SECRET);
-    return 'user';
+  const getRole = async (): Promise<string | null> => {
+    const role = await AsyncStorage.getItem('role');
+    return role;
   };
 
   return (
