@@ -21,14 +21,6 @@ export default function App() {
     'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
   });
 
-  const hideSplashScreenAsync = async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  };
-
-  hideSplashScreenAsync();
-
   if(!fontsLoaded) return null;
 
   return (

@@ -12,8 +12,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconButton } from 'react-native-paper';
 
-SplashScreen.preventAutoHideAsync();
-
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
 
@@ -36,7 +34,7 @@ export default function AppRouter() {
   return (
     <NavigationContainer>
       {role === 'admin'
-        ? <Drawer.Navigator >
+        ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} >
           <Drawer.Screen
             name='HomeAdmin'
             component={HomeAdmin}
@@ -49,7 +47,7 @@ export default function AppRouter() {
             <Stack.Screen name='LoginAdmin' component={LoginAdmin} />
             <Stack.Screen name='RegisterUser' component={RegisterUser} />
           </Stack.Navigator>
-          : <Tab.Navigator screenOptions={{ headerShown: false }} >
+          : <Tab.Navigator screenOptions={{ headerShown: false, tabBarLabelStyle: { fontFamily: 'Poppins' } }} >
             <Tab.Screen
               name='HomeUser'
               component={HomeUser}
@@ -81,9 +79,6 @@ export default function AppRouter() {
               }}
             />
           </Tab.Navigator>
-          // <Stack.Group>
-          //   <Stack.Screen name='HomeUser' component={HomeUser} />
-          // </Stack.Group>
       }
     </NavigationContainer>
   );
