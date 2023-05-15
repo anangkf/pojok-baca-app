@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "pojok-baca-app",
+    "name": "Pojok Baca",
     "slug": "pojok-baca-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/pojok-baca-adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anangkf.pojokbacaapp"
     },
     "web": {
       "favicon": "./assets/pojok-baca-favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ee72be6c-698e-4f5f-a976-294271f3101c"
+      }
     }
   }
 }
