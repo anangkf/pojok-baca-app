@@ -33,20 +33,20 @@ export default function AppRouter() {
 
   return (
     <NavigationContainer>
-      {role === 'admin'
-        ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} >
-          <Drawer.Screen
-            name='HomeAdmin'
-            component={HomeAdmin}
-            options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
-          />
-        </Drawer.Navigator>
-        : isLoggedIn === false
-          ? <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='LoginUser' component={LoginUser} />
-            <Stack.Screen name='LoginAdmin' component={LoginAdmin} />
-            <Stack.Screen name='RegisterUser' component={RegisterUser} />
-          </Stack.Navigator>
+      {isLoggedIn === false
+        ? <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='LoginUser' component={LoginUser} />
+          <Stack.Screen name='LoginAdmin' component={LoginAdmin} />
+          <Stack.Screen name='RegisterUser' component={RegisterUser} />
+        </Stack.Navigator>
+        : role === 'admin'
+          ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} >
+            <Drawer.Screen
+              name='HomeAdmin'
+              component={HomeAdmin}
+              options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
+            />
+          </Drawer.Navigator>
           : <Tab.Navigator screenOptions={{ headerShown: false, tabBarLabelStyle: { fontFamily: 'Poppins' } }} >
             <Tab.Screen
               name='HomeUser'
