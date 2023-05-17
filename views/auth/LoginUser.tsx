@@ -50,7 +50,7 @@ function LoginUser({ navigation }: LoginUserScreenProps) {
             });
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } catch (error: any) {
-            const errMsg = error.response.data.message;
+            const errMsg = error?.response?.data?.message || error.message;
             Toast.show({
               type: 'error',
               text1: CONST.TOAST_ERROR_TITLE,

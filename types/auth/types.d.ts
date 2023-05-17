@@ -9,7 +9,7 @@ type AuthContextType = {
   logout: () => void;
   loginAdmin: (accessToken: string) => void;
   getToken: () => void;
-  getRole: () => Promise<string | null>;
+  getRole: (accessToken: string) => string | null;
   role: string | null;
 }
 
