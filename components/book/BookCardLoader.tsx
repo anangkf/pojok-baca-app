@@ -1,20 +1,27 @@
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import SkeletonLoader from '../common/SkeletonLoader';
 
-const BookCardLoader = ({ isLoading }: BookCardLoaderProps) => {
+const BookCardLoader = ({ isLoading, horizontal }: BookCardLoaderProps) => {
+  const { width: screenWidth } = Dimensions.get('window');
+  const marginRight = 10;
+  const width = horizontal ? 150 : (screenWidth / 2) - marginRight;
+
   return (
     <View
       style={{
-        width: 150,
-        marginRight: 8,
+        width,
+        marginVertical: 6,
+        marginRight,
         paddingBottom: 4
       }}
     >
+      {/* image skeleton */}
       <SkeletonLoader
         visible={!isLoading}
-        width={150}
-        height={200}
+        width={width}
+        height={width * 1.5}
       />
+      {/* title skeleton */}
       <View
         style={{
           marginVertical: 16,
@@ -24,14 +31,14 @@ const BookCardLoader = ({ isLoading }: BookCardLoaderProps) => {
       >
         <SkeletonLoader
           visible={!isLoading}
-          width={130}
-
+          width={horizontal ? 130 : width * 13/15}
         />
         <SkeletonLoader
           visible={!isLoading}
-          width={130}
+          width={horizontal ? 130 : width * 13/15}
         />
       </View>
+      {/* book detail skeleton */}
       <View
         style={{
           flexDirection: 'row',
@@ -43,11 +50,11 @@ const BookCardLoader = ({ isLoading }: BookCardLoaderProps) => {
       >
         <SkeletonLoader
           visible={!isLoading}
-          width={100}
+          width={width * 2/3}
         />
         <SkeletonLoader
           visible={!isLoading}
-          width={30}
+          width={width / 5}
         />
       </View>
     </View>

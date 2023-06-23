@@ -1,21 +1,23 @@
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const BookCard = ({ book }: BookCardProps) => {
+const BookCard = ({ book, horizontal }: BookCardProps) => {
+  const { width: screenWidth } = Dimensions.get('window');
+  const marginRight = screenWidth * 0.025;
+  const width = horizontal ? 150 : (screenWidth / 2) - marginRight;
+
   return (
     <Card
       key={book.id}
       style={{
-        width: 150,
+        width,
         marginVertical: 6,
-        marginRight: 10,
+        marginRight,
         backgroundColor: '#FFFEFC'
       }}
     >
-
-      <Card.Cover source={{ uri: book.thumbnail }} />
-
+      <Card.Cover source={{ uri: book.thumbnail }} style={{ height: width * 1.5 }} />
       <Card.Title
         title={book.title}
         titleVariant='labelMedium'

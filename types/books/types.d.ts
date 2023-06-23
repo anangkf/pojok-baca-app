@@ -28,7 +28,3 @@ interface Genre {
   id: string;
   name: string
 }
-
-type BookCardProps = {
-  book: Book;
-}

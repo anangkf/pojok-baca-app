@@ -12,6 +12,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconButton } from 'react-native-paper';
 import SearchScreen from '../views/user/SearchScreen';
+import AdminBook from '../views/admin/AdminBook';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -47,6 +48,7 @@ export default function AppRouter() {
               component={HomeAdmin}
               options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
             />
+            <Drawer.Screen name='AdminBook' component={AdminBook} options={{ drawerLabel: 'Buku', headerTitle: 'Buku' }} />
           </Drawer.Navigator>
           : <Tab.Navigator
             screenOptions={{
