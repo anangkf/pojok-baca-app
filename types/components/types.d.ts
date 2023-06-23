@@ -15,3 +15,8 @@ type FlexWrapperProps = {
   children: JSX.Element | JSX.Element[] | React.ReactElement | React.ReactElement[] | string;
   style?: object
 }
+
+type ScrollableContainerProps = {
+  children: JSX.Element | JSX.Element[] | React.ReactElement | React.ReactElement[] | string;
+  style?: object
+}

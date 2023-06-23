@@ -11,6 +11,7 @@ import HomeAdmin from '../views/admin/HomeAdmin';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconButton } from 'react-native-paper';
+import SearchScreen from '../views/user/SearchScreen';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -47,7 +48,14 @@ export default function AppRouter() {
               options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
             />
           </Drawer.Navigator>
-          : <Tab.Navigator screenOptions={{ headerShown: false, tabBarLabelStyle: { fontFamily: 'Poppins' } }} >
+          : <Tab.Navigator
+            screenOptions={{
+              headerShown: false,
+              tabBarLabelStyle: { fontFamily: 'Poppins' },
+              tabBarStyle: { height: 55, paddingVertical: 6 },
+              tabBarHideOnKeyboard: true,
+            }}
+          >
             <Tab.Screen
               name='HomeUser'
               component={HomeUser}
@@ -55,6 +63,16 @@ export default function AppRouter() {
                 tabBarLabel: 'Beranda',
                 tabBarIcon: ({ color, size }) => (
                   <IconButton icon='home' iconColor={color} size={size} />
+                )
+              }}
+            />
+            <Tab.Screen
+              name='Cari'
+              component={SearchScreen}
+              options={{
+                tabBarLabel: 'Cari',
+                tabBarIcon: ({ color, size }) => (
+                  <IconButton icon='search' iconColor={color} size={size} />
                 )
               }}
             />

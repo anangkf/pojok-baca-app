@@ -1,0 +1,3 @@
+type BookCardLoaderProps = {
+  isLoading: boolean;
+}

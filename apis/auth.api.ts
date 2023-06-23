@@ -26,6 +26,14 @@ const APIAuth = {
       throw error;
     }
   },
+  getAccountInfo: async () => {
+    try {
+      const res = await axiosInstance.get('/auth/me');
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 };
 
 export default APIAuth;

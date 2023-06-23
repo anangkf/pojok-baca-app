@@ -9,6 +9,7 @@ import AppRouter from './routes';
 import AuthProvider from './context/AuthContext';
 import theme from './styles/theme';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import UserProvider from './context/UserContext';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,18 +26,20 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <PaperProvider
-          settings={{
-            icon: props => <AwesomeIcon {...props} />
-          }}
-          theme={theme}
-        >
-          <StatusBar style="auto" />
-          <AppRouter />
-          <Toast />
-        </PaperProvider>
-      </SafeAreaProvider>
+      <UserProvider>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <PaperProvider
+            settings={{
+              icon: props => <AwesomeIcon {...props} />
+            }}
+            theme={theme}
+          >
+            <StatusBar style='auto' />
+            <AppRouter />
+            <Toast />
+          </PaperProvider>
+        </SafeAreaProvider>
+      </UserProvider>
     </AuthProvider>
   );
 }

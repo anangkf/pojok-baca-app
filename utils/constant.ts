@@ -16,7 +16,8 @@ const CONST = {
   EMAIL_REGEX: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
   TOAST_ERROR_TITLE: 'Uppsss...',
   TOAST_SUCCESS_TITLE: 'Yaay!',
-  JWT_SECRET
+  JWT_SECRET,
+  TEXT_INPUT_ROUNDNESS: 12
 };
 
 export default CONST;

@@ -83,6 +83,7 @@ function LoginUser({ navigation }: LoginUserScreenProps) {
                 onBlur={handleBlur('email')}
                 value={values.email}
                 error={Boolean(errors.email)}
+                keyboardType='email-address'
                 textContentType='emailAddress'
                 autoCapitalize='none'
                 left={<TextInput.Icon icon='envelope' />}
