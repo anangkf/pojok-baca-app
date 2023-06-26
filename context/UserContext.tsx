@@ -33,12 +33,22 @@ const UserProvider = ({ children }: IUserContextProps) => {
     }
   };
 
+  const [title, setTitle] = useState('');
+  const getTitle = (params: string) => {
+    const capitalizedTitle = params
+      .split('-')
+      .map((part: string) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+      .join(' ');
+    setTitle(capitalizedTitle);
+  };
+
   return (
     <UserContext.Provider
       value={{
         isLoading, setIsLoading,
         books, getAllBooks,
-        accountInfo, getAccountInfo
+        accountInfo, getAccountInfo,
+        getTitle, title,
       }}
     >
       {children}

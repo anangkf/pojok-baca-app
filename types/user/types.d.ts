@@ -29,4 +29,6 @@ type UserContextType = {
   getAllBooks: () => Promise<void>;
   accountInfo: User | null;
   getAccountInfo: () => Promise<void>;
+  getTitle: (string) => void;
+  title: string;
 }

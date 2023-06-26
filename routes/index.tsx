@@ -13,6 +13,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconButton } from 'react-native-paper';
 import SearchScreen from '../views/user/SearchScreen';
 import AdminBook from '../views/admin/AdminBook';
+import AllBooks from '../views/user/book/AllBooks';
+import BlankScreen from '../views/BlankScreen';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -29,7 +31,7 @@ export default function AppRouter() {
 
   const Stack = createNativeStackNavigator<StackParamsList>();
   const Drawer = createDrawerNavigator();
-  const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
   if(isLoggedIn === null) return null;
 
@@ -51,6 +53,7 @@ export default function AppRouter() {
             <Drawer.Screen name='AdminBook' component={AdminBook} options={{ drawerLabel: 'Buku', headerTitle: 'Buku' }} />
           </Drawer.Navigator>
           : <Tab.Navigator
+            id='Tab'
             screenOptions={{
               headerShown: false,
               tabBarLabelStyle: { fontFamily: 'Poppins' },
@@ -69,6 +72,14 @@ export default function AppRouter() {
               }}
             />
             <Tab.Screen
+              name='AllBooks'
+              component={AllBooks}
+              initialParams={{ sort: 'all' }}
+              options={{
+                tabBarItemStyle: { display: 'none' }
+              }}
+            />
+            <Tab.Screen
               name='Cari'
               component={SearchScreen}
               options={{
@@ -80,7 +91,7 @@ export default function AppRouter() {
             />
             <Tab.Screen
               name='Buku'
-              component={HomeUser}
+              component={BlankScreen}
               options={{
                 tabBarLabel: 'Buku',
                 tabBarIcon: ({ color, size }) => (
@@ -90,7 +101,7 @@ export default function AppRouter() {
             />
             <Tab.Screen
               name='UserAkun'
-              component={HomeUser}
+              component={BlankScreen}
               options={{
                 tabBarLabel: 'Akun',
                 tabBarIcon: ({ color, size }) => (

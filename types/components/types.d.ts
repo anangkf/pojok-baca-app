@@ -3,7 +3,14 @@ type StackParamsList = {
   LoginAdmin: undefined;
   RegisterUser: undefined;
   HomeAdmin: undefined;
+}
+
+type BottomTabsParamList = {
   HomeUser: undefined;
+  Cari: undefined;
+  Buku: undefined;
+  AllBooks: {sort: 'all' | 'best-seller' | 'mungkin-kamu-suka' | 'baru-rilis'} | undefined;
+  UserAkun: undefined;
 }
 
 type ContainerProps = {

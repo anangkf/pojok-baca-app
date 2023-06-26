@@ -6,8 +6,14 @@ import BookList from '../../components/book/BookList';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SkeletonLoader from '../../components/common/SkeletonLoader';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const HomeUser = () => {
+type HomeUserProps = {
+ navigation: NativeStackScreenProps<BottomTabsParamList, 'HomeUser'>['navigation']
+}
+// type HomeUserProps = NativeStackScreenProps<StackParamsList, 'HomeUser'>
+
+const HomeUser = ({ navigation }: HomeUserProps) => {
   const { logout } = useContext(AuthContext) as AuthContextType;
   const { getAllBooks, getAccountInfo, accountInfo, isLoading, setIsLoading } = useContext(UserContext) as UserContextType;
 
@@ -55,17 +61,17 @@ const HomeUser = () => {
         >
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
             <Text variant='labelLarge' style={{ fontSize: 16 }} >Best Seller</Text>
-            <Button onPress={() => {console.log('');}} >Lihat semua</Button>
+            <Button onPress={() => navigation.navigate('AllBooks', { sort: 'best-seller' })} >Lihat semua</Button>
           </View>
           <BookList />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
-            <Text variant='labelLarge' style={{ fontSize: 16 }}>Mungkin Anda suka</Text>
-            <Button onPress={() => {console.log('');}} >Lihat semua</Button>
+            <Text variant='labelLarge' style={{ fontSize: 16 }}>Mungkin Kamu suka</Text>
+            <Button onPress={() => navigation.navigate('AllBooks', { sort: 'mungkin-kamu-suka' })} >Lihat semua</Button>
           </View>
           <BookList />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
             <Text variant='labelLarge' style={{ fontSize: 16 }}>Baru Rilis</Text>
-            <Button onPress={() => {console.log('');}} >Lihat semua</Button>
+            <Button onPress={() => navigation.navigate('AllBooks', { sort: 'baru-rilis' })} >Lihat semua</Button>
           </View>
           <BookList />
           <Button mode='elevated' onPress={() => logout()} >Keluar</Button>
