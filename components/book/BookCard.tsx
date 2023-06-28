@@ -1,8 +1,11 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Dimensions, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const BookCard = ({ book, horizontal }: BookCardProps) => {
+  const navigation = useNavigation<NavigationProp<BottomTabsParamList>>();
+
   const { width: screenWidth } = Dimensions.get('window');
   const marginRight = screenWidth * 0.025;
   const width = horizontal ? 150 : (screenWidth / 2) - marginRight;
@@ -16,6 +19,7 @@ const BookCard = ({ book, horizontal }: BookCardProps) => {
         marginRight,
         backgroundColor: '#FFFEFC'
       }}
+      onPress={() => navigation.navigate('BookDetails', { bookId: book.id })}
     >
       <Card.Cover source={{ uri: book.thumbnail }} style={{ height: width * 1.5 }} />
       <Card.Title

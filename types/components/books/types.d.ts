@@ -11,3 +11,11 @@ type BookCardProps = {
 type BookListProps = {
   horizontal?: boolean;
 }
+
+type BookDataProps = {
+  book: Book | null;
+}
+
+type BookDataLoaderProps = {
+  isLoading: boolean;
+}

@@ -17,7 +17,14 @@ const CONST = {
   TOAST_ERROR_TITLE: 'Uppsss...',
   TOAST_SUCCESS_TITLE: 'Yaay!',
   JWT_SECRET,
-  TEXT_INPUT_ROUNDNESS: 12
+  TEXT_INPUT_ROUNDNESS: 12,
+  CHIP_COLORS: [
+    'primaryContainer',
+    'secondaryContainer',
+    'tertiaryContainer',
+    'errorContainer',
+  ],
+  BOTTOM_BAR_HEIGHT: 55
 };
 
 export default CONST;

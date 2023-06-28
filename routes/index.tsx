@@ -15,6 +15,8 @@ import SearchScreen from '../views/user/SearchScreen';
 import AdminBook from '../views/admin/AdminBook';
 import AllBooks from '../views/user/book/AllBooks';
 import BlankScreen from '../views/BlankScreen';
+import BookDetails from '../views/user/book/BookDetails';
+import CONST from '../utils/constant';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -57,7 +59,7 @@ export default function AppRouter() {
             screenOptions={{
               headerShown: false,
               tabBarLabelStyle: { fontFamily: 'Poppins' },
-              tabBarStyle: { height: 55, paddingVertical: 6 },
+              tabBarStyle: { height: CONST.BOTTOM_BAR_HEIGHT, paddingVertical: 6 },
               tabBarHideOnKeyboard: true,
             }}
           >
@@ -75,6 +77,14 @@ export default function AppRouter() {
               name='AllBooks'
               component={AllBooks}
               initialParams={{ sort: 'all' }}
+              options={{
+                tabBarItemStyle: { display: 'none' }
+              }}
+            />
+            <Tab.Screen
+              name='BookDetails'
+              component={BookDetails}
+              // initialParams={{ sort: 'all' }}
               options={{
                 tabBarItemStyle: { display: 'none' }
               }}

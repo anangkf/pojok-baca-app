@@ -31,4 +31,6 @@ type UserContextType = {
   getAccountInfo: () => Promise<void>;
   getTitle: (string) => void;
   title: string;
+  bookDetail: Book | null;
+  getBookDetail: (bookId: string) => Promise<void>;
 }

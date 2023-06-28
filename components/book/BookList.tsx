@@ -1,11 +1,16 @@
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import BookCard from './BookCard';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import BookCardLoader from './BookCardLoader';
 
 const BookList = ({ horizontal = true }: BookListProps) => {
-  const { isLoading, books } = useContext(UserContext) as UserContextType;
+  const { isLoading, setIsLoading, books, getAllBooks } = useContext(UserContext) as UserContextType;
+
+  const onRefresh = () => {
+    getAllBooks()
+      .finally(() => setIsLoading(false));
+  };
 
   if(isLoading) return(
     <FlatList
@@ -14,7 +19,7 @@ const BookList = ({ horizontal = true }: BookListProps) => {
       keyExtractor={(_, idx) => idx.toString()}
       horizontal={horizontal}
       numColumns={!horizontal ? 2 : undefined}
-      style={{ marginVertical: 6 }}
+      style={{ marginBottom: 4 }}
       showsHorizontalScrollIndicator={false}
     />
   );
@@ -26,8 +31,9 @@ const BookList = ({ horizontal = true }: BookListProps) => {
       keyExtractor={(item) => item.id}
       horizontal={horizontal}
       numColumns={!horizontal ? 2 : undefined}
-      style={{ marginVertical: 4 }}
+      style={{ marginBottom: 12 }}
       showsHorizontalScrollIndicator={false}
+      refreshControl={<RefreshControl refreshing={isLoading} onRefresh={onRefresh} />}
     />
   );
 };

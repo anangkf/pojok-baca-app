@@ -9,7 +9,8 @@ type BottomTabsParamList = {
   HomeUser: undefined;
   Cari: undefined;
   Buku: undefined;
-  AllBooks: {sort: 'all' | 'best-seller' | 'mungkin-kamu-suka' | 'baru-rilis'} | undefined;
+  AllBooks: {sort: 'all' | 'best-seller' | 'mungkin-kamu-suka' | 'baru-rilis'};
+  BookDetails: {bookId: string;};
   UserAkun: undefined;
 }
 

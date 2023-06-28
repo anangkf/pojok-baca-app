@@ -3,7 +3,7 @@ import { Badge, Button, IconButton, Text } from 'react-native-paper';
 import { AuthContext } from '../../context/AuthContext';
 import { UserContext } from '../../context/UserContext';
 import BookList from '../../components/book/BookList';
-import { ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SkeletonLoader from '../../components/common/SkeletonLoader';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -17,10 +17,12 @@ const HomeUser = ({ navigation }: HomeUserProps) => {
   const { logout } = useContext(AuthContext) as AuthContextType;
   const { getAllBooks, getAccountInfo, accountInfo, isLoading, setIsLoading } = useContext(UserContext) as UserContextType;
 
+  const fetchData = () => Promise
+    .all([getAllBooks(), getAccountInfo()])
+    .finally(() => setIsLoading(false));
+
   useEffect(() => {
-    Promise
-      .all([getAllBooks(), getAccountInfo()])
-      .finally(() => setIsLoading(false));
+    fetchData();
   }, []);
 
   return (
@@ -29,6 +31,7 @@ const HomeUser = ({ navigation }: HomeUserProps) => {
         paddingHorizontal: 0,
         paddingBottom: 16,
       }}
+      refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchData} />}
     >
       <SafeAreaView
         style={{

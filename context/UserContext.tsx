@@ -11,9 +11,37 @@ const UserProvider = ({ children }: IUserContextProps) => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const getAllBooks = async ():Promise<void> => {
-    setIsLoading(true);
-    const booksFromDB = await APIBooks.getAllBooks();
-    setBooks(booksFromDB);
+    try {
+      setIsLoading(true);
+      const booksFromDB = await APIBooks.getAllBooks();
+      setBooks(booksFromDB);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.message || error.message;
+      Toast.show({
+        type: 'error',
+        text1: CONST.TOAST_ERROR_TITLE,
+        text2: errMsg
+      });
+    }
+  };
+
+  const [bookDetail, setBookDetail] = useState<Book | null>(null);
+
+  const getBookDetail =async (bookId: string) => {
+    try {
+      setIsLoading(true);
+      const book = await APIBooks.getBookById(bookId);
+      setBookDetail(book);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.message || error.message;
+      Toast.show({
+        type: 'error',
+        text1: CONST.TOAST_ERROR_TITLE,
+        text2: errMsg
+      });
+    }
   };
 
   const [accountInfo, setAccountInfo] = useState<AccountInfoType | null>(null);
@@ -25,10 +53,11 @@ const UserProvider = ({ children }: IUserContextProps) => {
       setAccountInfo(res);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
+      const errMsg = error?.response?.data?.message || error.message;
       Toast.show({
         type: 'error',
         text1: CONST.TOAST_ERROR_TITLE,
-        text2: `Error getting account info: ${error.response.data}`
+        text2: `Error getting account info: ${errMsg}`
       });
     }
   };
@@ -48,7 +77,8 @@ const UserProvider = ({ children }: IUserContextProps) => {
         isLoading, setIsLoading,
         books, getAllBooks,
         accountInfo, getAccountInfo,
-        getTitle, title,
+        title, getTitle,
+        bookDetail, getBookDetail
       }}
     >
       {children}
