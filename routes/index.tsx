@@ -46,7 +46,7 @@ export default function AppRouter() {
           <Stack.Screen name='RegisterUser' component={RegisterUser} />
         </Stack.Navigator>
         : role === 'admin'
-          ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} >
+          ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} backBehavior='order' >
             <Drawer.Screen
               name='HomeAdmin'
               component={HomeAdmin}
@@ -56,6 +56,7 @@ export default function AppRouter() {
           </Drawer.Navigator>
           : <Tab.Navigator
             id='Tab'
+            backBehavior='order'
             screenOptions={{
               headerShown: false,
               tabBarLabelStyle: { fontFamily: 'Poppins' },
@@ -76,7 +77,7 @@ export default function AppRouter() {
             <Tab.Screen
               name='AllBooks'
               component={AllBooks}
-              initialParams={{ sort: 'all' }}
+              initialParams={{ sort: 'semua' }}
               options={{
                 tabBarItemStyle: { display: 'none' }
               }}

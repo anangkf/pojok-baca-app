@@ -19,3 +19,14 @@ type BookDataProps = {
 type BookDataLoaderProps = {
   isLoading: boolean;
 }
+
+type BottomSheetBookFilterProps = {
+  handleModalDismissPress: () => void;
+  handleContentLayout: ({ nativeEvent: { layout: { height }, }, }: {
+    nativeEvent: {
+        layout: {
+            height: number;
+        };
+    };
+}) => void;
+}

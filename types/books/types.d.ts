@@ -9,10 +9,15 @@ interface Book {
   genres: Genre[];
   pages: number;
   rating: number;
+  language: string;
+  description: string;
+  readers: Reader[];
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date;
 }
+
+type Reader = Pick<User, 'id', 'email', 'name', 'gender'>;
 
 interface Author {
   id: string;

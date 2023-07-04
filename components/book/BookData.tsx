@@ -84,8 +84,9 @@ const BookData = ({ book }: BookDataProps) => {
             style={{
               textAlign: 'justify',
             }}
+            ellipsizeMode='middle'
           >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellat necessitatibus sit? Voluptatem sed numquam recusandae tempore quisquam natus officiis rerum, commodi, nisi quibusdam eligendi? Amet eaque exercitationem error! Deserunt, quo pariatur! In maxime perspiciatis esse possimus enim est error autem earum sint natus qui dolores facere quibusdam libero tenetur, vitae, atque et! Non distinctio vel nihil perferendis et consectetur, assumenda vitae, atque dolorum sapiente beatae quasi labore minima sequi quisquam! Consequatur placeat labore earum a, dolores voluptate cumque quam suscipit natus dolorum assumenda fugiat quod corporis distinctio deleniti voluptatum aperiam facilis iusto soluta obcaecati iste ducimus explicabo accusantium? Unde?
+            {book?.description}
           </Text>
           <Text
             variant='labelLarge'
@@ -118,14 +119,13 @@ const BookData = ({ book }: BookDataProps) => {
           </View>
           <View style={{ flexDirection: 'row' }} >
             <Text variant='bodyMedium' style={{ width: 90 }} >Bahasa</Text>
-            <Text variant='titleSmall' style={{ width: screenWidth - 110 }}>: {book?.pages}</Text>
+            <Text variant='titleSmall' style={{ width: screenWidth - 110 }}>: {book?.language}</Text>
           </View>
           <View style={{ flexDirection: 'row' }} >
             <Text variant='bodyMedium' style={{ width: 90 }} >Pembaca</Text>
-            <Text variant='titleSmall' style={{ width: screenWidth - 110 }}>: {book?.pages} orang</Text>
+            <Text variant='titleSmall' style={{ width: screenWidth - 110 }}>: {book?.readers.length} orang</Text>
           </View>
         </View>
-
       </View>
     </View>
   );
