@@ -35,4 +35,7 @@ type UserContextType = {
   getBookDetail: (bookId: string) => Promise<void>;
   getBooksInShelf: () => Promise<void>;
   usersBookShelf: BookInShelf[] | null;
+  addBookToShelf: ({ bookId }: AddBookToShelfArgs) => Promise<void>;
+  addingBookToShelf: boolean;
+  setAddingBookToShelf: React.Dispatch<React.SetStateAction<boolean>>;
 }

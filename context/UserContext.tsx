@@ -89,6 +89,37 @@ const UserProvider = ({ children }: IUserContextProps) => {
     }
   };
 
+  const [addingBookToShelf, setAddingBookToShelf] = useState(false);
+  const addBookToShelf = async ({ bookId }: AddBookToShelfArgs) => {
+    try {
+      setAddingBookToShelf(true);
+      const res: BookInShelf = await APIBooks.addBookToShelf({ bookId });
+
+      let newState: BookInShelf[];
+      if(usersBookShelf) {
+        newState = usersBookShelf?.concat(res);
+      } else {
+        newState = [res];
+      }
+      setUsersBookShelf(newState);
+
+      Toast.show({
+        text1: CONST.TOAST_SUCCESS_TITLE,
+        text2: 'Berhasil menambahkan buku ke rak!'
+      });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.message || error.message;
+      Toast.show({
+        type: 'error',
+        text1: CONST.TOAST_ERROR_TITLE,
+        text2: errMsg
+      });
+    } finally {
+      setAddingBookToShelf(false);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -97,7 +128,8 @@ const UserProvider = ({ children }: IUserContextProps) => {
         accountInfo, getAccountInfo,
         title, getTitle,
         bookDetail, getBookDetail,
-        usersBookShelf, getBooksInShelf,
+        usersBookShelf, getBooksInShelf, addBookToShelf,
+        addingBookToShelf, setAddingBookToShelf
       }}
     >
       {children}

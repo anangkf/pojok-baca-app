@@ -42,3 +42,7 @@ interface BookInShelf {
   finishedAt: string | null;
   book: Book;
 }
+
+type AddBookToShelfArgs = {
+  bookId: string;
+}

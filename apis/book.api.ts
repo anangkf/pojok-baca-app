@@ -12,6 +12,10 @@ const APIBooks = {
   getBooksInShelf: async () => {
     const res = await axiosInstance.get('/user/book');
     return res.data;
+  },
+  addBookToShelf: async (data: AddBookToShelfArgs) => {
+    const res = await axiosInstance.post('/user/book', data);
+    return res.data;
   }
 };
 

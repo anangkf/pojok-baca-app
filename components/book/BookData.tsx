@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Dimensions } from 'react-native';
 import { Image, View } from 'react-native';
 import { Button, Chip, Divider, IconButton, Text } from 'react-native-paper';
 import { Rating } from 'react-native-rating-element';
 import theme from '../../styles/theme';
 import getRandomBackgroundColor from '../../utils/getRandomBackgroundColor';
+import { UserContext } from '../../context/UserContext';
 
 const BookData = ({ book }: BookDataProps) => {
   const screenWidth = Dimensions.get('screen').width;
+
+  const { addBookToShelf, addingBookToShelf } = useContext(UserContext) as UserContextType;
 
   const [descLines, setDescLines] = useState(10);
   const [isDescToogled, setisDescToogled] = useState(false);
@@ -46,7 +49,13 @@ const BookData = ({ book }: BookDataProps) => {
             alignItems: 'center'
           }}
         >
-          <Button mode='contained' onPress={() => {'';}} >Tambahkan ke Rak</Button>
+          <Button
+            mode='contained'
+            onPress={() => addBookToShelf({ bookId: book?.id as string })}
+            loading={addingBookToShelf}
+          >
+            Tambahkan ke Rak
+          </Button>
           <IconButton
             icon={'heart'}
             mode='outlined'
