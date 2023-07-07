@@ -28,3 +28,7 @@ type ScrollableContainerProps = {
   children: JSX.Element | JSX.Element[] | React.ReactElement | React.ReactElement[] | string;
   style?: object
 }
+
+type NotFoundProps = {
+  text: string;
+}

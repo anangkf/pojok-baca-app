@@ -17,6 +17,7 @@ import AllBooks from '../views/user/book/AllBooks';
 import BlankScreen from '../views/BlankScreen';
 import BookDetails from '../views/user/book/BookDetails';
 import CONST from '../utils/constant';
+import UsersBook from '../views/user/book/UsersBook';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -102,7 +103,7 @@ export default function AppRouter() {
             />
             <Tab.Screen
               name='Buku'
-              component={BlankScreen}
+              component={UsersBook}
               options={{
                 tabBarLabel: 'Buku',
                 tabBarIcon: ({ color, size }) => (

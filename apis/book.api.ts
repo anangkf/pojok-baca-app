@@ -8,6 +8,10 @@ const APIBooks = {
   getBookById: async (id: string) => {
     const res = await axiosInstance.get(`/book/${id}`);
     return res.data;
+  },
+  getBooksInShelf: async () => {
+    const res = await axiosInstance.get('/user/book');
+    return res.data;
   }
 };
 

@@ -28,5 +28,14 @@ type BottomSheetBookFilterProps = {
             height: number;
         };
     };
-}) => void;
+  }) => void;
+}
+
+type BookShelfProps = {
+  horizontal?: boolean;
+}
+
+type BookShelfCardProps = {
+  item: BookInShelf;
+  horizontal?: boolean;
 }

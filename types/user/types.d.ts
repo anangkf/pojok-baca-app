@@ -33,4 +33,6 @@ type UserContextType = {
   title: string;
   bookDetail: Book | null;
   getBookDetail: (bookId: string) => Promise<void>;
+  getBooksInShelf: () => Promise<void>;
+  usersBookShelf: BookInShelf[] | null;
 }

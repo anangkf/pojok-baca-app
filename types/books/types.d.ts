@@ -33,3 +33,12 @@ interface Genre {
   id: string;
   name: string
 }
+
+interface BookInShelf {
+  id: string;
+  pagesRead: number;
+  completed: boolean;
+  startedAt: string;
+  finishedAt: string | null;
+  book: Book;
+}
