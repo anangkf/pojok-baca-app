@@ -7,7 +7,20 @@ type AuthContextType = {
   determineAuthStatus: () => void;
   login: (accessToken: string) => void;
   logout: () => void;
+  loginAdmin: (accessToken: string) => void;
   getToken: () => void;
-  getRole: (accessToken: string) => void;
-  role: string;
+  getRole: (accessToken: string) => string | null;
+  role: string | null;
+}
+
+type LoginBodyType = {
+  email: string;
+  password: string;
+}
+
+type RegisterUserBodyType = {
+  name: string;
+  email: string;
+  password: string;
+  gender: string;
 }

@@ -1,30 +1,39 @@
 {
   "expo": {
-    "name": "pojok-baca-app",
+    "name": "Pojok Baca",
     "slug": "pojok-baca-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/pojok-baca-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/pojok-baca-splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0061A2"
     },
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      "expo-document-picker"
     ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/pojok-baca-adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anangkf.pojokbacaapp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/pojok-baca-favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ee72be6c-698e-4f5f-a976-294271f3101c"
+      }
     }
   }
 }

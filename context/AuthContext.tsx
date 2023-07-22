@@ -1,33 +1,55 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import JWT from 'expo-jwt';
+import CONST from '../utils/constant';
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: IAuthContextProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [role, setRole] = useState<string | null>('');
 
   const determineAuthStatus = async (): Promise<boolean> => {
     const accessToken = await getToken();
-    console.log(accessToken);
     setIsLoggedIn(Boolean(accessToken));
+
+    if(accessToken) {
+      const role = getRole(accessToken as string);
+      setRole(role);
+    }
     return Boolean(accessToken);
   };
 
   const login = async (accessToken: string) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       await AsyncStorage.setItem('accessToken', accessToken);
+      setRole('user');
       setIsLoggedIn(true);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
   const logout = async () => {
+    // eslint-disable-next-line no-useless-catch
     try {
       await AsyncStorage.removeItem('accessToken');
       setIsLoggedIn(false);
+      setRole('');
     } catch (error) {
-      console.log(error);
+      throw error;
+    }
+  };
+
+  const loginAdmin = async (accessToken: string) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      await AsyncStorage.setItem('accessToken', accessToken);
+      setRole('admin');
+      setIsLoggedIn(true);
+    } catch (error) {
+      throw error;
     }
   };
 
@@ -36,11 +58,10 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     return accessToken;
   };
 
-  const [role, setRole] = useState('user');
+  const getRole = (accessToken: string): string | null => {
+    const { role } = JWT.decode(accessToken, CONST.JWT_SECRET);
 
-  const getRole = (accessToken: string): string => {
-    setRole(accessToken);
-    return 'user';
+    return role;
   };
 
   return (
@@ -48,6 +69,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       value={{
         isLoggedIn, determineAuthStatus,
         login, logout, getToken,
+        loginAdmin,
         getRole, role
       }}
     >
