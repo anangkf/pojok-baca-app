@@ -11,6 +11,13 @@ import HomeAdmin from '../views/admin/HomeAdmin';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconButton } from 'react-native-paper';
+import SearchScreen from '../views/user/SearchScreen';
+import AdminBook from '../views/admin/AdminBook';
+import AllBooks from '../views/user/book/AllBooks';
+import BlankScreen from '../views/BlankScreen';
+import BookDetails from '../views/user/book/BookDetails';
+import CONST from '../utils/constant';
+import UsersBook from '../views/user/book/UsersBook';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -27,7 +34,7 @@ export default function AppRouter() {
 
   const Stack = createNativeStackNavigator<StackParamsList>();
   const Drawer = createDrawerNavigator();
-  const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
   if(isLoggedIn === null) return null;
 
@@ -40,14 +47,24 @@ export default function AppRouter() {
           <Stack.Screen name='RegisterUser' component={RegisterUser} />
         </Stack.Navigator>
         : role === 'admin'
-          ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} >
+          ? <Drawer.Navigator screenOptions={{ drawerLabelStyle: { fontFamily: 'Poppins' } }} backBehavior='order' >
             <Drawer.Screen
               name='HomeAdmin'
               component={HomeAdmin}
               options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
             />
+            <Drawer.Screen name='AdminBook' component={AdminBook} options={{ drawerLabel: 'Buku', headerTitle: 'Buku' }} />
           </Drawer.Navigator>
-          : <Tab.Navigator screenOptions={{ headerShown: false, tabBarLabelStyle: { fontFamily: 'Poppins' } }} >
+          : <Tab.Navigator
+            id='Tab'
+            backBehavior='order'
+            screenOptions={{
+              headerShown: false,
+              tabBarLabelStyle: { fontFamily: 'Poppins' },
+              tabBarStyle: { height: CONST.BOTTOM_BAR_HEIGHT, paddingVertical: 6 },
+              tabBarHideOnKeyboard: true,
+            }}
+          >
             <Tab.Screen
               name='HomeUser'
               component={HomeUser}
@@ -59,8 +76,34 @@ export default function AppRouter() {
               }}
             />
             <Tab.Screen
+              name='AllBooks'
+              component={AllBooks}
+              initialParams={{ sort: 'semua' }}
+              options={{
+                tabBarItemStyle: { display: 'none' }
+              }}
+            />
+            <Tab.Screen
+              name='BookDetails'
+              component={BookDetails}
+              // initialParams={{ sort: 'all' }}
+              options={{
+                tabBarItemStyle: { display: 'none' }
+              }}
+            />
+            <Tab.Screen
+              name='Cari'
+              component={SearchScreen}
+              options={{
+                tabBarLabel: 'Cari',
+                tabBarIcon: ({ color, size }) => (
+                  <IconButton icon='search' iconColor={color} size={size} />
+                )
+              }}
+            />
+            <Tab.Screen
               name='Buku'
-              component={HomeUser}
+              component={UsersBook}
               options={{
                 tabBarLabel: 'Buku',
                 tabBarIcon: ({ color, size }) => (
@@ -70,7 +113,7 @@ export default function AppRouter() {
             />
             <Tab.Screen
               name='UserAkun'
-              component={HomeUser}
+              component={BlankScreen}
               options={{
                 tabBarLabel: 'Akun',
                 tabBarIcon: ({ color, size }) => (

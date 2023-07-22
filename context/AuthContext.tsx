@@ -7,6 +7,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: IAuthContextProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [role, setRole] = useState<string | null>('');
 
   const determineAuthStatus = async (): Promise<boolean> => {
     const accessToken = await getToken();
@@ -23,6 +24,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     // eslint-disable-next-line no-useless-catch
     try {
       await AsyncStorage.setItem('accessToken', accessToken);
+      setRole('user');
       setIsLoggedIn(true);
     } catch (error) {
       throw error;
@@ -44,6 +46,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     // eslint-disable-next-line no-useless-catch
     try {
       await AsyncStorage.setItem('accessToken', accessToken);
+      setRole('admin');
       setIsLoggedIn(true);
     } catch (error) {
       throw error;
@@ -54,8 +57,6 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     const accessToken = await AsyncStorage.getItem('accessToken');
     return accessToken;
   };
-
-  const [role, setRole] = useState<string | null>('');
 
   const getRole = (accessToken: string): string | null => {
     const { role } = JWT.decode(accessToken, CONST.JWT_SECRET);

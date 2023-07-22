@@ -98,6 +98,7 @@ function RegisterUser({ navigation }: RegisterUserScreenProps) {
                 value={values.email}
                 error={Boolean(errors.email)}
                 textContentType='emailAddress'
+                keyboardType='email-address'
                 autoCapitalize='none'
                 left={<TextInput.Icon icon='envelope' />}
               />
