@@ -16,6 +16,10 @@ const APIBooks = {
   addBookToShelf: async (data: AddBookToShelfArgs) => {
     const res = await axiosInstance.post('/user/book', data);
     return res.data;
+  },
+  searchBooks:async (keyword: string) => {
+    const res = await axiosInstance.get(`/book?search=${keyword}`);
+    return res.data;
   }
 };
 

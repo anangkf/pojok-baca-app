@@ -38,4 +38,7 @@ type UserContextType = {
   addBookToShelf: ({ bookId }: AddBookToShelfArgs) => Promise<void>;
   addingBookToShelf: boolean;
   setAddingBookToShelf: React.Dispatch<React.SetStateAction<boolean>>;
+  searchBooks: (keyword: string) => Promise<void>;
+  searchResults: Book[] | undefined;
+  setSearchResults: React.Dispatch<React.SetStateAction<Book[] | undefined>>;
 }

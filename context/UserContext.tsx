@@ -120,6 +120,24 @@ const UserProvider = ({ children }: IUserContextProps) => {
     }
   };
 
+  const [searchResults, setSearchResults] = useState<Book[]>();
+
+  const searchBooks = async (keyword: string) => {
+    try {
+      setIsLoading(true);
+      const res = await APIBooks.searchBooks(keyword);
+      setSearchResults(res);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.message || error.message;
+      Toast.show({
+        type: 'error',
+        text1: CONST.TOAST_ERROR_TITLE,
+        text2: errMsg
+      });
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -129,7 +147,8 @@ const UserProvider = ({ children }: IUserContextProps) => {
         title, getTitle,
         bookDetail, getBookDetail,
         usersBookShelf, getBooksInShelf, addBookToShelf,
-        addingBookToShelf, setAddingBookToShelf
+        addingBookToShelf, setAddingBookToShelf,
+        searchBooks, searchResults, setSearchResults,
       }}
     >
       {children}

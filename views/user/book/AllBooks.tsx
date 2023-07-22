@@ -1,4 +1,4 @@
-import { Button, Text, TextInput } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { Dimensions, View } from 'react-native';
 import { useContext, useEffect, useCallback } from 'react';
 import { UserContext } from '../../../context/UserContext';
@@ -46,35 +46,17 @@ const AllBooks = ({ route }: AllBooksProps) => {
     <GestureHandlerRootView
       style={{
         padding: 6,
-        paddingBottom: CONST.BOTTOM_BAR_HEIGHT * 6.85
+        paddingBottom: CONST.BOTTOM_BAR_HEIGHT * 3.8
+        // paddingBottom: CONST.BOTTOM_BAR_HEIGHT * 6.85
       }}
     >
       <BottomSheetModalProvider>
         <SafeAreaView
         >
-          <View
-            // style={{
-            //   padding: 6,
-            //   paddingBottom: CONST.BOTTOM_BAR_HEIGHT * 4.45
-            // }}
-          >
+          <View>
             <SkeletonLoader visible={!isLoading} height={27} >
               <Text variant='headlineSmall' >{title}</Text>
             </SkeletonLoader>
-            <TextInput
-              mode='outlined'
-              // onChangeText={handleChange('email')}
-              // onBlur={handleBlur('email')}
-              // value={values.email}
-              // error={Boolean(errors.email)}
-              placeholderTextColor={'gray'}
-              placeholder='judul, penulis atau kategori'
-              autoCapitalize='none'
-              outlineStyle={{
-                borderRadius: CONST.TEXT_INPUT_ROUNDNESS
-              }}
-              left={<TextInput.Icon icon='search' />}
-            />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 2 }} >
               <Button
                 icon={'filter'}

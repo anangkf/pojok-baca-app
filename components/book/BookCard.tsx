@@ -7,7 +7,7 @@ const BookCard = ({ book, horizontal }: BookCardProps) => {
   const navigation = useNavigation<NavigationProp<BottomTabsParamList>>();
 
   const { width: screenWidth } = Dimensions.get('window');
-  const marginRight = screenWidth * 0.025;
+  const marginRight = screenWidth * 0.03;
   const width = horizontal ? 150 : (screenWidth / 2) - marginRight;
 
   return (

@@ -7,6 +7,9 @@ type StackParamsList = {
 
 type BottomTabsParamList = {
   HomeUser: undefined;
+  SearchScreen: {
+    keyword: string;
+  };
   Cari: undefined;
   Buku: undefined;
   AllBooks: {sort: 'semua' | 'best-seller' | 'mungkin-kamu-suka' | 'baru-rilis'};
