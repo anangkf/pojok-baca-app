@@ -17,10 +17,19 @@ const APIBooks = {
     const res = await axiosInstance.post('/user/book', data);
     return res.data;
   },
-  searchBooks:async (keyword: string) => {
+  searchBooks: async (keyword: string) => {
     const res = await axiosInstance.get(`/book?search=${keyword}`);
     return res.data;
-  }
+  },
+  // addThumbnail: async (image: any) => {
+  //   try {
+  //     const res = await axiosInstance.post('/book/thumbnail', image);
+  //     return res.data;
+  //   } catch (error) {
+  //     console.log({ error });
+  //     throw error;
+  //   }
+  // }
 };
 
 export default APIBooks;

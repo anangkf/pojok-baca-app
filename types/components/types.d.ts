@@ -35,3 +35,11 @@ type ScrollableContainerProps = {
 type NotFoundProps = {
   text: string;
 }
+
+type UploadFileProps = {
+  type: 'image' | 'file';
+  image?: {source: string, name: string;}
+  file?: {source: string, name: string;}
+  onPress: () => void;
+  onCancel: () => void;
+}

@@ -18,6 +18,7 @@ import BlankScreen from '../views/BlankScreen';
 import BookDetails from '../views/user/book/BookDetails';
 import CONST from '../utils/constant';
 import UsersBook from '../views/user/book/UsersBook';
+import AdminPostBook from '../views/admin/AdminPostBook';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -54,6 +55,7 @@ export default function AppRouter() {
               options={{ drawerLabel: 'Beranda', headerTitle: 'Beranda' }}
             />
             <Drawer.Screen name='AdminBook' component={AdminBook} options={{ drawerLabel: 'Buku', headerTitle: 'Buku' }} />
+            <Drawer.Screen name='AdminPostBook' component={AdminPostBook} options={{ drawerLabel: 'Tambah Buku', headerTitle: 'Tambah Buku' }} />
           </Drawer.Navigator>
           : <Tab.Navigator
             id='Tab'
