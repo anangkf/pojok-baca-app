@@ -14,6 +14,7 @@ type BottomTabsParamList = {
   Buku: undefined;
   AllBooks: {sort: 'semua' | 'best-seller' | 'mungkin-kamu-suka' | 'baru-rilis'};
   BookDetails: {bookId: string;};
+  ReadBook: {userBookId: string;};
   UserAkun: undefined;
 }
 

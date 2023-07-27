@@ -20,7 +20,7 @@ const BookShelfCard = ({ item, horizontal }: BookShelfCardProps) => {
         marginRight,
         backgroundColor: '#FFFEFC'
       }}
-      onPress={() => navigation.navigate('BookDetails', { bookId: item.book.id })}
+      onPress={() => navigation.navigate('ReadBook', { userBookId: item.id })}
     >
       <Card.Cover source={{ uri: item.book.thumbnail }} style={{ height: width * 1.5 }} />
       <Card.Title

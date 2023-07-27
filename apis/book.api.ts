@@ -21,6 +21,10 @@ const APIBooks = {
     const res = await axiosInstance.get(`/book?search=${keyword}`);
     return res.data;
   },
+  readBookInshelf: async (userBookId: string) => {
+    const res = await axiosInstance.get(`/user/book/${userBookId}`);
+    return res.data;
+  }
   // addThumbnail: async (image: any) => {
   //   try {
   //     const res = await axiosInstance.post('/book/thumbnail', image);

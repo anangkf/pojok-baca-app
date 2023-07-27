@@ -19,6 +19,7 @@ import BookDetails from '../views/user/book/BookDetails';
 import CONST from '../utils/constant';
 import UsersBook from '../views/user/book/UsersBook';
 import AdminPostBook from '../views/admin/AdminPostBook';
+import ReadBook from '../views/user/book/ReadBook';
 
 export default function AppRouter() {
   const { isLoggedIn, determineAuthStatus, role } = useContext(AuthContext) as AuthContextType;
@@ -111,6 +112,14 @@ export default function AppRouter() {
                 tabBarIcon: ({ color, size }) => (
                   <IconButton icon='leanpub' iconColor={color} size={size} />
                 )
+              }}
+            />
+            <Tab.Screen
+              name='ReadBook'
+              component={ReadBook}
+              // initialParams={{ sort: 'all' }}
+              options={{
+                tabBarItemStyle: { display: 'none' }
               }}
             />
             <Tab.Screen
